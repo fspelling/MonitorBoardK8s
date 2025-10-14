@@ -1,0 +1,6 @@
+@Poc.BoardK8sApi_HostAddress = http://localhost:5291
+
+GET {{Poc.BoardK8sApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

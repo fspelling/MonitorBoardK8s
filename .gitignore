@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/BoardK8s/.vs
+/src/BoardK8s/Poc.BoardK8sApi/bin/Debug/net9.0
+/src/BoardK8s/Poc.BoardK8sApi/obj
