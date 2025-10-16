@@ -3,6 +3,7 @@ using FluentValidation;
 using Poc.BoardK8sApi.Features.Pods;
 using Poc.BoardK8sApi.Infra;
 using Scalar.AspNetCore;
+using Poc.BoardK8sApi.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
@@ -18,6 +19,8 @@ builder.Services.AddSingleton<KubernetesClient>();
 builder.Services.AddSingleton(sp => sp.GetRequiredService<KubernetesClient>().Client);
 
 builder.Services.AddScoped<GetPods.KubernetesService>();
+
+MapperConfig.Register();
 
 var app = builder.Build();
 

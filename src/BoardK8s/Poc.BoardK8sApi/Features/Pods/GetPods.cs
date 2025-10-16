@@ -11,19 +11,19 @@ namespace Poc.BoardK8sApi.Features.Pods
 {
     public static class GetPods
     {
-        public sealed record Query(string NamespaceName) : IRequest<Result<List<Pod>>>;
+        public sealed record Query(string NamespaceName) : IRequest<Result<List<Pod>?>>;
 
         public sealed class Validator : AbstractValidator<Query>
         {
             public Validator() => RuleFor(r => r.NamespaceName).NotEmpty();
         }
 
-        public sealed class Handler(KubernetesService kubernetesService, IValidator<Query> validator) : IRequestHandler<Query, Result<List<Pod>>>
+        public sealed class Handler(KubernetesService kubernetesService, IValidator<Query> validator) : IRequestHandler<Query, Result<List<Pod>?>>
         {
             private readonly KubernetesService _kubernetesService = kubernetesService;
             private readonly IValidator<Query> _validator = validator;
 
-            public async Task<Result<List<Pod>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Pod>?>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var validateResult = _validator.Validate(request);
 
@@ -39,10 +39,10 @@ namespace Poc.BoardK8sApi.Features.Pods
         {
             private readonly IKubernetes _kubeClient = kubeClient;
 
-            public async Task<List<Pod>> ObterPods(string namespaceName)
+            public async Task<List<Pod>?> ObterPods(string namespaceName)
             {
                 var pods = await _kubeClient.CoreV1.ListNamespacedPodAsync(namespaceName);
-                return pods.Adapt<List<Pod>>();
+                return pods.Items.Count > 0 ? pods.Items.Adapt<List<Pod>>() : null;
             }
         }
     }
