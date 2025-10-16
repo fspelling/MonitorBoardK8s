@@ -5,3 +5,4 @@
 /src/BoardK8s/.vs
 /src/BoardK8s/Poc.BoardK8sApi/bin/Debug/net9.0
 /src/BoardK8s/Poc.BoardK8sApi/obj
+src/BoardK8s/packages-microsoft-prod.deb

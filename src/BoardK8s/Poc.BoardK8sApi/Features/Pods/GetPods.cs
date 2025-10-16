@@ -51,9 +51,9 @@ namespace Poc.BoardK8sApi.Features.Pods
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            var endpoint = app.MapGet("api/pods/", async (string namespaceName, ISender sender) =>
+            var endpoint = app.MapGet("api/pods/", async (string? namespaceName, ISender sender) =>
             {
-                var query = new GetPods.Query(namespaceName);
+                var query = new GetPods.Query(namespaceName ?? "default");
                 var result = await sender.Send(query);
 
                 return result.ToResultCustom();

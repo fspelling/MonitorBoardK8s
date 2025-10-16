@@ -1,0 +1,27 @@
+{
+	"name": "C# (.NET)",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.csharp"
+			]
+		}
+	},
+	"remoteUser": "dev",
+	"updateRemoteUserUID": true,
+
+	"mounts": [
+		"source=${localEnv:HOME}/.kube/config,target=/home/dev/.kube/config,type=bind"
+	],
+	"runArgs": [
+		"--add-host=host.docker.internal:host-gateway"
+	],
+
+	"postCreateCommand": "dotnet restore ./Poc.BoardK8sApi.csproj"
+}

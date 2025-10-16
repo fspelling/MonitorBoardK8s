@@ -1,0 +1,13 @@
+services:
+  app:
+    container_name: board_k8s_api_dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/app
+      - ~/.kube/config:/home/dev/.kube/config:ro
+    ports:
+      - "7171:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development

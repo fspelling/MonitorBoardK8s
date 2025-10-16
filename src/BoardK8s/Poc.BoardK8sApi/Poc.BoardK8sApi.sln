@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.BoardK8sApi", "Poc.BoardK8sApi.csproj", "{7D9C39E1-C0DE-C4D9-82F1-9AC4B8B3F134}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D9C39E1-C0DE-C4D9-82F1-9AC4B8B3F134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9C39E1-C0DE-C4D9-82F1-9AC4B8B3F134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9C39E1-C0DE-C4D9-82F1-9AC4B8B3F134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9C39E1-C0DE-C4D9-82F1-9AC4B8B3F134}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF8505D2-D0F2-4F32-ABDB-EC88EADB116A}
+	EndGlobalSection
+EndGlobal
