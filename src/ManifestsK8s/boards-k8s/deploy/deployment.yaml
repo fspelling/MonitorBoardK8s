@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boardsk8s
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: boardsk8s
+  template:
+    metadata:
+      labels:
+        app: boardsk8s
+    spec:
+      serviceAccount: web
+      containers:
+        - name: container-boardsk8s
+          image: fspelling/boardk8s:v5
+          envFrom:
+            - configMapRef:
+                name: boardsk8s
+          ports:
+            - containerPort: 8080
