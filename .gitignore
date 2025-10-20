@@ -6,3 +6,14 @@
 /src/BoardK8s/Poc.BoardK8sApi/bin/Debug/net9.0
 /src/BoardK8s/Poc.BoardK8sApi/obj
 src/BoardK8s/packages-microsoft-prod.deb
+/src/MonitorK8sPod/.vs
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Application/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Application/obj
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Domain/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Domain/obj
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Infra/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Infra/obj
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Shared/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Shared/obj
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Worker/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.Worker/obj
