@@ -1,11 +1,10 @@
 ﻿using Carter;
-using FluentResults;
 using FluentValidation;
 using k8s;
 using Mapster;
 using MediatR;
 using Poc.BoardK8sApi.Entities;
-using Poc.BoardK8sApi.Shared.Extensions;
+using Poc.BoardK8sApi.Shared.Results;
 
 namespace Poc.BoardK8sApi.Features.Pods
 {
@@ -28,10 +27,10 @@ namespace Poc.BoardK8sApi.Features.Pods
                 var validateResult = _validator.Validate(request);
 
                 if (!validateResult.IsValid)
-                    return Result.Fail(validateResult.Errors.FirstOrDefault()!.ErrorMessage);
+                    return Result<List<Pod>?>.Failure(validateResult.Errors.FirstOrDefault()!.ErrorMessage);
 
                 var pods = await _kubernetesService.ObterPods(request.NamespaceName);
-                return Result.Ok(pods);
+                return Result<List<Pod>?>.Success(pods);
             }
         }
 
@@ -56,7 +55,7 @@ namespace Poc.BoardK8sApi.Features.Pods
                 var query = new GetPods.Query(namespaceName ?? "default");
                 var result = await sender.Send(query);
 
-                return result.ToResultCustom();
+                return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result.MsgError);
             });
 
             ConfigMetadata(endpoint);
