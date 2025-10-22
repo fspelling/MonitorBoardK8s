@@ -17,3 +17,5 @@ src/BoardK8s/packages-microsoft-prod.deb
 /src/MonitorK8sPod/Poc.MonitorK8sPod.Shared/obj
 /src/MonitorK8sPod/Poc.MonitorK8sPod.Worker/bin/Debug/net9.0
 /src/MonitorK8sPod/Poc.MonitorK8sPod.Worker/obj
+/src/MonitorK8sPod/Poc.MonitorK8sPod.IoC/bin/Debug/net9.0
+/src/MonitorK8sPod/Poc.MonitorK8sPod.IoC/obj
