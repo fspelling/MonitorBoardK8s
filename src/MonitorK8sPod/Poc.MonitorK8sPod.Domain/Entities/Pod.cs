@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Poc.MonitorK8sPod.Domain.Entities
 {
-    internal class Pod
-    {
-    }
+    public record Pod(Guid Uid, string Name, string NamespaceProperty, List<Container> Containers);
 }
