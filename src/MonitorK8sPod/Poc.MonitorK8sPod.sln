@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{0A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Shared", "3 - Shared", "{E0593846-2310-40DE-9581-7ED3DC86DDCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.MonitorK8sPod.IoC", "Poc.MonitorK8sPod.IoC\Poc.MonitorK8sPod.IoC.csproj", "{FD2CA528-6983-A72F-DAED-04725A896CC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{D1B939CB-F8F1-49EA-AD27-D936F201A75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1B939CB-F8F1-49EA-AD27-D936F201A75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1B939CB-F8F1-49EA-AD27-D936F201A75D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2CA528-6983-A72F-DAED-04725A896CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2CA528-6983-A72F-DAED-04725A896CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2CA528-6983-A72F-DAED-04725A896CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2CA528-6983-A72F-DAED-04725A896CC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{1794E5A0-E9EB-42B6-AE2B-1FC22182C595} = {3E613A54-D1BA-4B76-8477-2422D2E63E21}
 		{622A95CA-A57F-450A-AF59-E597E4FAEE50} = {0AF98EDF-35F1-40AF-9D56-3FFAA138891C}
 		{E0593846-2310-40DE-9581-7ED3DC86DDCD} = {3E613A54-D1BA-4B76-8477-2422D2E63E21}
+		{FD2CA528-6983-A72F-DAED-04725A896CC8} = {622A95CA-A57F-450A-AF59-E597E4FAEE50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A772B241-497C-4D11-B096-6513DEB80D84}

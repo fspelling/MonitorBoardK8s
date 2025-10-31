@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Poc.MonitorK8sPod.Shared.Results
+﻿namespace Poc.MonitorK8sPod.Shared.Results
 {
-    internal class Result
+    public sealed class Result<T> : Result
     {
+        public T? Data { get; }
+
+        private Result(T? data, bool isSuccess, string? msgError) : base(isSuccess, msgError)
+            => Data = data;
+
+        public static Result<T> Success(T value) => new(value, true, null);
+        public static new Result<T> Failure(string error) => new(default, false, error);
+    }
+
+    public class Result
+    {
+        public bool IsSuccess { get; }
+        public string? MsgError { get; }
+
+        protected Result(bool isSuccess, string? msgError)
+        {
+            IsSuccess = isSuccess;
+            MsgError = msgError;
+        }
+
+        public static Result Success() => new(true, null);
+        public static Result Failure(string error) => new(false, error);
     }
 }

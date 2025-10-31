@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="KubernetesClient" Version="18.0.5" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Poc.MonitorK8sPod.Application\Poc.MonitorK8sPod.Application.csproj" />
+    <ProjectReference Include="..\Poc.MonitorK8sPod.Domain\Poc.MonitorK8sPod.Domain.csproj" />
+    <ProjectReference Include="..\Poc.MonitorK8sPod.Infra\Poc.MonitorK8sPod.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

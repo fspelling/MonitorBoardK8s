@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="KubernetesClient" Version="18.0.5" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Poc.MonitorK8sPod.Domain\Poc.MonitorK8sPod.Domain.csproj" />
+    <ProjectReference Include="..\Poc.MonitorK8sPod.IoC\Poc.MonitorK8sPod.IoC.csproj" />
   </ItemGroup>
 </Project>

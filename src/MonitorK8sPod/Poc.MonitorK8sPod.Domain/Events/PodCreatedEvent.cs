@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Poc.MonitorK8sPod.Domain.Entities;
 
 namespace Poc.MonitorK8sPod.Domain.Events
 {
-    internal class PodCreatedEvent
+    public record PodCreatedEvent(Pod Pod) : INotification
     {
+        public DateTime DateCreated { get; } = DateTime.Now;
     }
 }
