@@ -2,9 +2,9 @@
 using Mapster;
 using Poc.MonitorK8sPod.Domain.Entities;
 
-namespace Poc.MonitorK8sPod.IoC.MapAdapt
+namespace Poc.MonitorK8sPod.IoC
 {
-    public static class PodMapper
+    public static class MapperObjects
     {
         public static void Register()
         {
