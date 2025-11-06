@@ -18,6 +18,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSignalR();
 builder.Services.AddCarter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
@@ -46,6 +47,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.MapHub<NotificationPod.NotificationPodHub>("notification-pod");
 app.MapCarter();
 app.UseHttpsRedirection();
 
