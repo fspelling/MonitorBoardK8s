@@ -12,10 +12,10 @@ namespace Poc.MonitorK8sPod.Infra.ExternalServices.Factory
             if (string.IsNullOrWhiteSpace(baseUrl))
                 throw new ArgumentException("A URL base não pode ser nula ou vazia.", nameof(baseUrl));
 
-            var httpClient = _httpClientFactory.CreateClient(nameof(IWebhookAPI));
+            var httpClient = _httpClientFactory.CreateClient("Webhook");
             httpClient.BaseAddress = new Uri(baseUrl);
 
-            return RestService.For<IWebhookAPI>(baseUrl);
+            return RestService.For<IWebhookAPI>(httpClient);
         }
     }
 }

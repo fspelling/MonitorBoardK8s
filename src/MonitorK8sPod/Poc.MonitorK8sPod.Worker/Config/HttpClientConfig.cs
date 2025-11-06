@@ -7,7 +7,7 @@ namespace Poc.MonitorK8sPod.Worker.Config
     {
         public static IServiceCollection RegisterHttpClient(this IServiceCollection services)
         {
-            services.AddRefitClientWithResilience<IWebhookAPI>();
+            services.AddHttpClientWithResilience("Webhook");
             return services;
         }
     }

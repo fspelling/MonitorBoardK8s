@@ -14,7 +14,7 @@ namespace Poc.MonitorK8sPod.IoC
     {
         public static void Register(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<RabbitmqSettings>(opt => configuration.GetSection(nameof(RabbitmqSettings)));
+            services.Configure<RabbitmqSettings>(configuration.GetSection(nameof(RabbitmqSettings)));
 
             services.AddSingleton<IConnectionFactory>(sp =>
             {
