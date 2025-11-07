@@ -12,7 +12,7 @@ COPY Poc.MonitorK8sPod.Worker/Poc.MonitorK8sPod.Worker.csproj Poc.MonitorK8sPod.
 COPY Poc.MonitorK8sPod.Infra/Poc.MonitorK8sPod.Infra.csproj Poc.MonitorK8sPod.Infra/
 COPY Poc.MonitorK8sPod.IoC/Poc.MonitorK8sPod.IoC.csproj Poc.MonitorK8sPod.IoC/
 
-RUN dotnet restore "Poc.MonitorK8sPod.Worker/Poc.MonitorK8sPod.Worker.csproj
+RUN dotnet restore "Poc.MonitorK8sPod.Worker/Poc.MonitorK8sPod.Worker.csproj"
 
 COPY . .
 
