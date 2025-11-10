@@ -4,3 +4,4 @@ metadata:
   name: monitork8spod
 data:
   K8S_MODE: "K8S"
+  ASPNETCORE_ENVIRONMENT: "Development"

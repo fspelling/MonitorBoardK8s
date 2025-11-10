@@ -12,7 +12,7 @@ namespace Poc.MonitorK8sPod.Application.Commands
 
         private HashSet<WebhookEndpoints> _webhooks =
         [
-            new WebhookEndpoints("http://localhost:5291/api/pods/notification", nameof(PodCreatedEvent), true)
+            new WebhookEndpoints("http://boardsk8s/api/pods/notification", nameof(PodCreatedEvent), true)
         ];
 
         public async Task<Result> Handle(WebhookCommand request, CancellationToken cancellationToken)
