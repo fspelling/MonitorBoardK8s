@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: monitorK8spod
+  name: monitork8spod
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: monitorK8spod
+      app: monitork8spod
   template:
     metadata:
       labels:
-        app: monitorK8spod
+        app: monitork8spod
     spec:
       serviceAccount: worker
       containers:
-        - name: container-monitorK8spod
-          image: fspelling/monitor-k8s-pod:v1
+        - name: container-monitork8spod
+          image: fspelling/monitor-k8s-pod:v2
           envFrom:
             - configMapRef:
-                name: monitorK8spod
+                name: monitork8spod

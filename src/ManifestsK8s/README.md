@@ -50,6 +50,8 @@ kubectl apply -f ./monitor-K8s-pod/service-account/service-account.yaml
 kubectl apply -f ./monitor-K8s-pod/service-account/role.yaml
 kubectl apply -f ./monitor-K8s-pod/service-account/role-binding.yaml
 kubectl apply -f ./monitor-K8s-pod/deploy/configmap.yaml
+kubectl apply -f ./monitor-K8s-pod/deploy/deployment-rabbitmq.yaml
+kubectl apply -f ./monitor-K8s-pod/deploy/service-rabbitmq.yaml
 kubectl apply -f ./monitor-K8s-pod/deploy/deployment.yaml
 ```
 

@@ -23,7 +23,8 @@ namespace Poc.MonitorK8sPod.IoC
                 {
                     HostName = settings.HostName,
                     UserName = settings.UserName,
-                    Password = settings.Password
+                    Password = settings.Password,
+                    Port = settings.Port
                 };
             });
 
