@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: boardsk8s
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: boardsk8s
