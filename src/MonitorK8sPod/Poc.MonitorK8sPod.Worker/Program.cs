@@ -19,7 +19,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddHostedService<Worker>();
 
 builder.Services.RegisterDI(builder.Configuration)
-                .RegisterHttpClient()
+                .RegisterHttpClient(builder.Configuration)
                 .RegisterMapperObjects();
 
 var host = builder.Build();

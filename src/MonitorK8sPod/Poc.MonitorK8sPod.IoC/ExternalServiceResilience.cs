@@ -2,6 +2,7 @@
 using Polly;
 using Polly.CircuitBreaker;
 using Polly.Retry;
+using Polly.Timeout;
 using Refit;
 using System.Net;
 
@@ -9,7 +10,7 @@ namespace Poc.MonitorK8sPod.IoC
 {
     public static class ExternalServiceResilience
     {
-        private static RetryStrategyOptions<HttpResponseMessage> retryOptions = new RetryStrategyOptions<HttpResponseMessage>()
+        private static RetryStrategyOptions<HttpResponseMessage> retryOptions = new ()
         {
             BackoffType = DelayBackoffType.Exponential,
             MaxRetryAttempts = 5,
@@ -31,7 +32,7 @@ namespace Poc.MonitorK8sPod.IoC
             }
         };
 
-        private static CircuitBreakerStrategyOptions<HttpResponseMessage> circuitOptions = new CircuitBreakerStrategyOptions<HttpResponseMessage>()
+        private static CircuitBreakerStrategyOptions<HttpResponseMessage> circuitOptions = new ()
         {
             BreakDuration = TimeSpan.FromSeconds(10),
             MinimumThroughput = 5,
@@ -48,19 +49,30 @@ namespace Poc.MonitorK8sPod.IoC
             }
         };
 
-        public static IServiceCollection AddHttpClientWithResilience(this IServiceCollection services, string httpClientName)
+        private static TimeoutStrategyOptions timeoutOptions = new()
+        {
+            Timeout = TimeSpan.FromSeconds(10),
+            OnTimeout = static args =>
+            {
+                Console.WriteLine($"Tempo limite atingido após {args.Timeout.TotalSeconds}s");
+                return default;
+            }
+        };
+
+        public static IServiceCollection AddHttpClientWithResilience(this IServiceCollection services, string httpClientName, int timeout)
         {
             services.AddHttpClient(httpClientName)
                     .AddResilienceHandler("HttpClientPipeline", builder =>
                     {
                         builder.AddRetry(retryOptions);
                         builder.AddCircuitBreaker(circuitOptions);
+                        builder.AddTimeout(timeoutOptions);
                     });
 
             return services;
         }
 
-        public static IServiceCollection AddRefitClientWithResilience<IInterface>(this IServiceCollection services, string baseUrl)
+        public static IServiceCollection AddRefitClientWithResilience<IInterface>(this IServiceCollection services, string baseUrl, int timeout)
             where IInterface : class
         {
             services.AddRefitClient<IInterface>()
@@ -69,6 +81,7 @@ namespace Poc.MonitorK8sPod.IoC
                     {
                         builder.AddRetry(retryOptions);
                         builder.AddCircuitBreaker(circuitOptions);
+                        builder.AddTimeout(timeoutOptions);
                     });
 
             return services;

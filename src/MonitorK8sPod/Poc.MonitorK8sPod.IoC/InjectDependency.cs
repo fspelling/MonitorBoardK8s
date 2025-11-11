@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Poc.MonitorK8sPod.Domain.Interfaces;
+using Poc.MonitorK8sPod.Infra.ExternalServices.Config;
 using Poc.MonitorK8sPod.Infra.ExternalServices.Factory;
 using Poc.MonitorK8sPod.Infra.Kubernetes;
 using Poc.MonitorK8sPod.Infra.Messaging;
@@ -15,6 +16,7 @@ namespace Poc.MonitorK8sPod.IoC
         public static void Register(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<RabbitmqSettings>(configuration.GetSection(nameof(RabbitmqSettings)));
+            services.Configure<ExternalServicesSettings>(configuration.GetSection(nameof(ExternalServicesSettings)));
 
             services.AddSingleton<IConnectionFactory>(sp =>
             {
