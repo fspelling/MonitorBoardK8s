@@ -81,7 +81,7 @@ namespace Poc.MonitorK8sPod.IoC
         {
             return new()
             {
-                Timeout = TimeSpan.FromSeconds(10),
+                Timeout = TimeSpan.FromSeconds(timeout),
                 OnTimeout = static args =>
                 {
                     Console.WriteLine($"Tempo limite atingido após {args.Timeout.TotalSeconds}s");
