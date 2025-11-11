@@ -49,16 +49,6 @@ namespace Poc.MonitorK8sPod.IoC
             }
         };
 
-        private static TimeoutStrategyOptions timeoutOptions = new()
-        {
-            Timeout = TimeSpan.FromSeconds(10),
-            OnTimeout = static args =>
-            {
-                Console.WriteLine($"Tempo limite atingido após {args.Timeout.TotalSeconds}s");
-                return default;
-            }
-        };
-
         public static IServiceCollection AddHttpClientWithResilience(this IServiceCollection services, string httpClientName, int timeout)
         {
             services.AddHttpClient(httpClientName)
@@ -66,7 +56,7 @@ namespace Poc.MonitorK8sPod.IoC
                     {
                         builder.AddRetry(retryOptions);
                         builder.AddCircuitBreaker(circuitOptions);
-                        builder.AddTimeout(timeoutOptions);
+                        builder.AddTimeout(ConfigureTimeout(timeout));
                     });
 
             return services;
@@ -81,10 +71,23 @@ namespace Poc.MonitorK8sPod.IoC
                     {
                         builder.AddRetry(retryOptions);
                         builder.AddCircuitBreaker(circuitOptions);
-                        builder.AddTimeout(timeoutOptions);
+                        builder.AddTimeout(ConfigureTimeout(timeout));
                     });
 
             return services;
+        }
+
+        private static TimeoutStrategyOptions ConfigureTimeout(int timeout)
+        {
+            return new()
+            {
+                Timeout = TimeSpan.FromSeconds(10),
+                OnTimeout = static args =>
+                {
+                    Console.WriteLine($"Tempo limite atingido após {args.Timeout.TotalSeconds}s");
+                    return default;
+                }
+            };
         }
     }
 }
