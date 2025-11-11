@@ -10,7 +10,7 @@ namespace Poc.MonitorK8sPod.IoC
 {
     public static class ExternalServiceResilience
     {
-        private static RetryStrategyOptions<HttpResponseMessage> retryOptions = new ()
+        private static readonly RetryStrategyOptions<HttpResponseMessage> retryOptions = new ()
         {
             BackoffType = DelayBackoffType.Exponential,
             MaxRetryAttempts = 5,
@@ -32,7 +32,7 @@ namespace Poc.MonitorK8sPod.IoC
             }
         };
 
-        private static CircuitBreakerStrategyOptions<HttpResponseMessage> circuitOptions = new ()
+        private readonly static CircuitBreakerStrategyOptions<HttpResponseMessage> circuitOptions = new ()
         {
             BreakDuration = TimeSpan.FromSeconds(10),
             MinimumThroughput = 5,
