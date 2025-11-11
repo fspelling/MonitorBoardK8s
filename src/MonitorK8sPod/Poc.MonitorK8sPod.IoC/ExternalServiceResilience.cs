@@ -41,7 +41,6 @@ namespace Poc.MonitorK8sPod.IoC
             {
                 return ValueTask.FromResult(args.Outcome switch
                 {
-                    { Result.StatusCode: HttpStatusCode.TooManyRequests } => true,
                     { Result.StatusCode: HttpStatusCode.RequestTimeout } => true,
                     { Result.StatusCode: HttpStatusCode.InternalServerError } => true,
                     _ => false
