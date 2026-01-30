@@ -1,1 +1,12 @@
+name: "MonitorK8sPod = Pipeline Ci-CD"
+run-name: "Pipeline CI-CD (MonitorK8sPod) executado por ${{github.actor}}"
 
+on:
+  pull_request:
+      branches: ['main']
+      paths:
+        - "src/MonitorK8sPod/*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
