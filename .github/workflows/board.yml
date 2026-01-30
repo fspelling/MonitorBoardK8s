@@ -19,4 +19,4 @@ jobs:
           dotnet-version: 9.0.x
       - name: Execucao do comando buils
         working-directory: ./src/BoardK8s
-        run: dotnet build BoardK8s.sln
+        run: dotnet build Poc.BoardK8s.sln
