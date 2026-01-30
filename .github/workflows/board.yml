@@ -1,4 +1,4 @@
-name: "BoardK8s - Pipeline Ci-CD"
+name: "BoardK8s - CI-CD"
 run-name: "Pipeline CI-CD (BoardK8s) executado por ${{github.actor}}"
 
 on:
@@ -13,10 +13,55 @@ jobs:
     steps:
       - name: "Obtendo arquivos do projeto"
         uses: actions/checkout@v4
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
+          
       - name: Execucao do comando buils
         working-directory: ./src/BoardK8s
         run: dotnet build Poc.BoardK8s.sln
+
+  #testes_qa
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obtendo arquivos do projeto"
+        uses: actions/checkout@v4
+        
+      - name: Analise dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+
+      - name: Autenticacao no Docker
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PWD }}
+        
+      - name: Build/Push da imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src/BoardK8s/Poc.BoardK8sApi
+          file: ./src/BoardK8s/Poc.BoardK8sApi/Dockerfile
+          push: true
+          tags: |
+            fspelling/boardk8s:latest
+            fspelling/boardk8s:v${{ github.run_number }}
+
+      - name: Scan trivy
+        uses: aquasecurity/trivy-action@0.23.0
+        with:
+          scan-type: 'image'
+          image-ref: fspelling/boardk8s:v${{ github.run_number }}
+          format: sarif
+          output: trivy-docker-result.sarif
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          
+      - name: Publicando vulnerabilidades
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          category: 'trivy-result'
+          sarif_file: trivy-docker-result.sarif
