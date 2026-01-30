@@ -1,4 +1,4 @@
-name: "BoardK8s = Pipeline Ci-CD"
+name: "BoardK8s - Pipeline Ci-CD"
 run-name: "Pipeline CI-CD (BoardK8s) executado por ${{github.actor}}"
 
 on:
