@@ -23,10 +23,13 @@ jobs:
         working-directory: ./src/BoardK8s
         run: dotnet build Poc.BoardK8s.sln
 
-  #testes_qa
+  testes_qa:
+   needs: [build]
+   uses: fspelling/worflow_generics/.github/workflows/qa.yml@main
+   secrets: inherit
 
   release:
-    needs: [build]
+    needs: [testes_qa]
     runs-on: ubuntu-latest
     steps:
       - name: "Obtendo arquivos do projeto"
@@ -67,3 +70,27 @@ jobs:
         with:
           category: 'trivy-result'
           sarif_file: trivy-docker-result.sarif
+
+  deploy_hml:
+    needs: [release]
+    uses: fspelling/worflow_generics/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment_name: hml
+      environment_url: http://homologacao.fspelling.net
+
+  testes_e2e:
+    needs: [deploy_hml]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Simulacao testes end-to-end"
+        run: echo "Implementar testes end-to-end"
+
+  deploy_prod:
+    needs: [testes_e2e]
+    uses: fspelling/worflow_generics/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment_name: prd
+      environment_url: http://producao.fspelling.net
+        
