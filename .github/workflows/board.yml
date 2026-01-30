@@ -1,0 +1,12 @@
+name: "BoardK8s = Pipeline Ci-CD"
+run-name: "Pipeline CI-CD (BoardK8s) executado por ${{github.actor}}"
+
+on:
+  pull_request:
+      branches: ['main']
+      paths:
+        - "src/BoardK8s/*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
