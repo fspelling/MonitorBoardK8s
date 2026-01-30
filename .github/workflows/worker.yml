@@ -5,7 +5,7 @@ on:
   pull_request:
       branches: ['main']
       paths:
-        - "src/MonitorK8sPod/*"
+        - "src/MonitorK8sPod/**"
 
 jobs:
   build:
@@ -13,3 +13,10 @@ jobs:
     steps:
       - name: "Obtendo arquivos do projeto"
         uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Execucao do comando buils
+        working-directory: ./src/MonitorK8sPod
+        run: dotnet build Poc.MonitorK8sPod.sln
