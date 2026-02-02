@@ -83,7 +83,7 @@ jobs:
   #     environment_url: http://homologacao.fspelling.net
 
   testes_e2e:
-    needs: [deploy_hml]
+    needs: [release]
     runs-on: ubuntu-latest
     steps:
       - name: "Simulacao testes end-to-end"
