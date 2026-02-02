@@ -25,7 +25,7 @@ jobs:
 
   testes_qa:
    needs: [build]
-   uses: fspelling/worflow_generics/.github/workflows/qa.yml@main
+   uses: fspelling/workflow_generics/.github/workflows/qa.yml@main
    secrets: inherit
    with:
      project_sonar: "board-k8s"
@@ -76,7 +76,7 @@ jobs:
 
   deploy_hml:
     needs: [release]
-    uses: fspelling/worflow_generics/.github/workflows/deploy.yml@main
+    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
     secrets: inherit
     with:
       environment_name: hml
@@ -91,7 +91,7 @@ jobs:
 
   deploy_prod:
     needs: [testes_e2e]
-    uses: fspelling/worflow_generics/.github/workflows/deploy.yml@main
+    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
     secrets: inherit
     with:
       environment_name: prd
