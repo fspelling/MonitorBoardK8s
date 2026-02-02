@@ -74,13 +74,13 @@ jobs:
           category: 'trivy-result'
           sarif_file: trivy-docker-result.sarif
 
-  deploy_hml:
-    needs: [release]
-    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
-    secrets: inherit
-    with:
-      environment_name: hml
-      environment_url: http://homologacao.fspelling.net
+  # deploy_hml:
+  #   needs: [release]
+  #   uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
+  #   secrets: inherit
+  #   with:
+  #     environment_name: hml
+  #     environment_url: http://homologacao.fspelling.net
 
   testes_e2e:
     needs: [deploy_hml]
@@ -89,11 +89,11 @@ jobs:
       - name: "Simulacao testes end-to-end"
         run: echo "Implementar testes end-to-end"
 
-  deploy_prod:
-    needs: [testes_e2e]
-    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
-    secrets: inherit
-    with:
-      environment_name: prd
-      environment_url: http://producao.fspelling.net
+  # deploy_prod:
+  #   needs: [testes_e2e]
+  #   uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
+  #   secrets: inherit
+  #   with:
+  #     environment_name: prd
+  #     environment_url: http://producao.fspelling.net
         
