@@ -15,7 +15,7 @@ spec:
       serviceAccount: web
       containers:
         - name: container-boardsk8s
-          image: fspelling/boardk8s:v7
+          image: fspelling/boardk8s
           envFrom:
             - configMapRef:
                 name: boardsk8s
