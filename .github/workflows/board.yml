@@ -27,6 +27,9 @@ jobs:
    needs: [build]
    uses: fspelling/worflow_generics/.github/workflows/qa.yml@main
    secrets: inherit
+   with:
+     project_sonar: "board-k8s"
+     file_solution: "Poc.BoardK8s.sln"
 
   release:
     needs: [testes_qa]
