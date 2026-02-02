@@ -52,5 +52,4 @@ app.MapCarter();
 app.UseHttpsRedirection();
 
 app.Run();
-
-// TODO: somente teste 9
+// TODO: somente teste 10
