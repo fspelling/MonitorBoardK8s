@@ -81,6 +81,14 @@ jobs:
     with:
       environment_name: hml
       host_name: homologacao.fspelling.net
+      manifests: |
+            ./src/ManifestsK8s/boards-k8s/service-account/service-account.yaml
+            ./src/ManifestsK8s/boards-k8s/service-account/role.yaml
+            ./src/ManifestsK8s/boards-k8s/service-account/role-binding.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/configmap.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/deployment.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/service.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/ingress.yaml
 
   testes_e2e:
     needs: [deploy_hml]
@@ -96,4 +104,12 @@ jobs:
     with:
       environment_name: prd
       host_name: producao.fspelling.net
+      manifests: |
+            ./src/ManifestsK8s/boards-k8s/service-account/service-account.yaml
+            ./src/ManifestsK8s/boards-k8s/service-account/role.yaml
+            ./src/ManifestsK8s/boards-k8s/service-account/role-binding.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/configmap.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/deployment.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/service.yaml
+            ./src/ManifestsK8s/boards-k8s/deploy/ingress.yaml
         
