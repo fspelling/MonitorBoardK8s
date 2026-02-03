@@ -80,5 +80,5 @@ jobs:
     secrets: inherit
     with:
       environment_name: hml
-      host_name: board.fspelling.net
+      host_name: homologacao.fspelling.net
         
