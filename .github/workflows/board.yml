@@ -81,4 +81,19 @@ jobs:
     with:
       environment_name: hml
       host_name: homologacao.fspelling.net
+
+  testes_e2e:
+    needs: [deploy_hml]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Simulacao testes end-to-end"
+        run: echo "Implementar testes end-to-end"
+
+  deploy_prd:
+    needs: [testes_e2e]
+    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment_name: prd
+      host_name: producao.fspelling.net
         
