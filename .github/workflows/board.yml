@@ -79,5 +79,6 @@ jobs:
     uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
     secrets: inherit
     with:
+      environment_name: hml
       host_name: board.fspelling.net
         
