@@ -15,7 +15,7 @@ spec:
       serviceAccount: worker
       containers:
         - name: container-monitork8spod
-          image: fspelling/monitor-k8s-pod:v9
+          image: fspelling/monitor-k8s-pod
           envFrom:
             - configMapRef:
                 name: monitork8spod
