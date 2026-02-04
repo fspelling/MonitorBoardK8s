@@ -13,10 +13,101 @@ jobs:
     steps:
       - name: "Obtendo arquivos do projeto"
         uses: actions/checkout@v4
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
+          
       - name: Execucao do comando buils
         working-directory: ./src/MonitorK8sPod
         run: dotnet build Poc.MonitorK8sPod.sln
+
+  testes_qa:
+   needs: [build]
+   uses: fspelling/workflow_generics/.github/workflows/qa.yml@main
+   secrets:
+     sonar_token: "${{ secrets.SONAR_TOKEN_MONITOR }}"
+   with:
+     project_sonar: "monitor-k8s"
+     file_solution: "Poc.MonitorK8sPod.sln"
+     
+  release:
+    needs: [testes_qa]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obtendo arquivos do projeto"
+        uses: actions/checkout@v4
+        
+      - name: Analise dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ./src/MonitorK8sPod/Dockerfile
+
+      - name: Autenticacao no Docker
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PWD }}
+        
+      - name: Build/Push da imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src/MonitorK8sPod
+          file: ./src/MonitorK8sPod/Dockerfile
+          push: true
+          tags: |
+            fspelling/monitor-k8s-pod:latest
+            fspelling/monitor-k8s-pod:v${{ github.run_number }}
+
+      - name: Scan trivy
+        uses: aquasecurity/trivy-action@0.23.0
+        with:
+          scan-type: 'image'
+          image-ref: fspelling/monitor-k8s-pod:v${{ github.run_number }}
+          format: sarif
+          output: trivy-docker-result.sarif
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          
+      - name: Publicando vulnerabilidades
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          category: 'monitor-trivy-result'
+          sarif_file: trivy-docker-result.sarif
+
+  deploy_hml:
+    needs: [release]
+    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment_name: hml
+      manifests: |
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/service-account.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/role.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/role-binding.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/configmap.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/deployment.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/deployment-rabbitmq.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/service-rabbitmq.yaml
+
+  testes_e2e:
+    needs: [deploy_hml]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Simulacao testes end-to-end"
+        run: echo "Implementar testes end-to-end"
+
+  deploy_prd:
+    needs: [testes_e2e]
+    uses: fspelling/workflow_generics/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment_name: prd
+      manifests: |
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/service-account.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/role.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/service-account/role-binding.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/configmap.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/deployment.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/deployment-rabbitmq.yaml
+            ./src/ManifestsK8s/monitor-K8s-pod/deploy/service-rabbitmq.yaml
