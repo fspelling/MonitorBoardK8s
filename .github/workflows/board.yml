@@ -26,7 +26,8 @@ jobs:
   testes_qa:
    needs: [build]
    uses: fspelling/workflow_generics/.github/workflows/qa.yml@main
-   secrets: inherit
+   secrets:
+     sonar_token: "${{ secrets.SONAR_TOKEN_BOARD }}"
    with:
      project_sonar: "board-k8s"
      file_solution: "Poc.BoardK8s.sln"
