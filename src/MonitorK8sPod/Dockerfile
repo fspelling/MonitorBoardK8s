@@ -35,3 +35,5 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 
 ENTRYPOINT ["dotnet", "Poc.MonitorK8sPod.Worker.dll"]
+
+# teste 1
