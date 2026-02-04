@@ -30,7 +30,7 @@ jobs:
      sonar_token: "${{ secrets.SONAR_TOKEN_MONITOR }}"
    with:
      project_sonar: "monitor-k8s"
-     file_solution: "Poc.MonitorK8sPod.sln"
+     file_full_solution: "./src/MonitorK8sPod/Poc.MonitorK8sPod.sln"
      
   release:
     needs: [testes_qa]
