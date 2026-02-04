@@ -30,7 +30,8 @@ jobs:
      sonar_token: "${{ secrets.SONAR_TOKEN_BOARD }}"
    with:
      project_sonar: "board-k8s"
-     file_full_solution: "./src/BoardK8s/Poc.BoardK8s.sln"
+     working_directory: "./src/BoardK8s"
+     file_solution: "Poc.BoardK8s.sln"
 
   release:
     needs: [testes_qa]
