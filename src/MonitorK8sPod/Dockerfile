@@ -36,4 +36,4 @@ USER $USERNAME
 
 ENTRYPOINT ["dotnet", "Poc.MonitorK8sPod.Worker.dll"]
 
-# teste 1
+# teste 2
